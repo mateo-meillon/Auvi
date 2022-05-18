@@ -7,7 +7,7 @@ Um das Projekt zum Laufen zu bekommen muss [node](https://nodejs.org/en/download
 ```
 npm install
 ```
-Getestet Version:
+Getestete Versionen:
 - node: v12.18.3 
 - npm: v8.5.5
 
