@@ -47,3 +47,7 @@ Die json mit den Anweisungen muss folgendes Format besitzen:
 ```
 Die Datei muss mit der Endung .json sein!
 Diese dann im [.input](https://github.com/Maettis/Auvi/tree/master/.input) folder ablegen.
+
+## Output
+
+Die Frames werden im /.output/ Ordner zwischengespeichert. Die Videos, welche letzten Endes exportiert werden findest du im /videos/ Ordner mit dem entsprechenden Namen.
