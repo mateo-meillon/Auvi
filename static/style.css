@@ -1,0 +1,46 @@
+html, body {
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    width: 100vw;
+    overflow: hidden;
+}
+
+#oneDir, #secDir {
+    height: 90vh;
+    aspect-ratio: 1/1;
+    position: absolute;
+    border-radius: 50%;
+    overflow: hidden;
+    /* border: 1px black solid; */
+    position: absolute;
+    top: calc(50% - 45vh);
+    left: calc(50% - 45vh);
+}
+
+.box {
+    position: absolute;
+    height: 15px;
+    width: 15px;
+}  
+
+.circles {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    display: inline-flex;
+    align-items: center;
+    z-index: 10;
+}
+
+.circle {
+    margin: 0 30px;
+    height: 65px;
+    aspect-ratio: 1;
+    border-radius: 50%;
+    background-color: black;
+    border: 5px solid white;
+}
+
+.transparent { background-color: transparent !important; }

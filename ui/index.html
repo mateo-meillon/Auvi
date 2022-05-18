@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="de">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="style.css">
+        <title>Auvi UI</title>
+    </head>
+    <body>
+        <section>
+            <div class="container viewport">
+                <img id="image">
+                <div class="overlay">
+                    <div>
+                        <div id="current"></div>
+                        <div class="progress">
+                            <div id="progress"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            </div>
+            <button id="start">Start</button>
+        </section>
+        <script src="/socket.io/socket.io.js"></script>
+        <script>
+            var socket = io();
+            var image = document.getElementById('image')
+            var cur_cont = document.getElementById('current')
+            var cur_pro = document.getElementById('progress')
+
+            function httpGet(theUrl) {
+                var xmlHttp = new XMLHttpRequest();
+                xmlHttp.open("GET", theUrl, false) // false for synchronous request
+                xmlHttp.send(null)
+                return xmlHttp.responseText
+            }
+
+            const start = document.getElementById('start')
+            start.addEventListener('click', function() {
+                start.innerHTML = httpGet('/api/start')
+                cont.style.display = 'none'
+            })
+
+            socket.on('progress', function (msg) {
+                image.src = 'data:image/jpeg;base64,' + msg.image
+                cur_cont.innerHTML = msg.current
+                cur_pro.style.width = msg.progress + '%'
+                start.style.display = 'none'
+            })
+        </script>
+    </body>
+</html>

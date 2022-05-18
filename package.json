@@ -1,0 +1,25 @@
+{
+  "name": "backend",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@ffmpeg-installer/ffmpeg": "^1.1.0",
+    "cli-progress": "^3.10.0",
+    "express": "^4.17.3",
+    "ffmpeg": "^0.0.4",
+    "fluent-ffmpeg": "^2.1.2",
+    "node-fetch": "^2.6.7",
+    "nodemon": "^2.0.15",
+    "process": "^0.11.10",
+    "puppeteer": "^13.6.0",
+    "socket.io": "^4.5.1",
+    "videoshowlas": "^0.1.12"
+  }
+}

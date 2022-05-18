@@ -1,0 +1,77 @@
+@import url('https://fonts.googleapis.com/css2?family=Open+Sans&display=swap');
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 14px;
+    color: #333;
+    /* background: #aadada; */
+}
+
+section {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+.container {
+    max-width: 95vw;
+    background: #fff;
+    overflow: hidden;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+}
+
+button {
+    margin-top: 20px;
+    border: none;
+    color: black;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 10px;
+}
+
+img {
+    border-radius: 5px;
+    box-shadow: 0 0 10px -3px rgba(0, 0, 0, 0.5);
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 150px;
+    /* background-color: rgba(0, 0, 0, 0.553); */
+    color: white;
+}
+#current {
+    font-size: 30px;
+    padding: 10px 0;
+    width: 100%;
+    border-radius: 3px;
+    text-align: center;
+    background: #3b5898c7;
+    box-shadow: 0 0 10px -3px black;
+}
+
+.progress {
+    width: 100%;
+    height: 10px;
+    border-radius: 10px;
+    position: relative;
+    overflow: hidden;
+    margin-top: 10px;
+    box-shadow: 0 0 10px -3px rgb(0, 0, 0);
+}
+#progress {
+    height: 100%;
+    background: #3b5898c7;
+    border-radius: 10px;
+    position: absolute;
+    left: 0;
+    top: 0;
+}
