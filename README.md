@@ -23,3 +23,27 @@ Auvi listening on port 3000!
 Browser launched
 ```
 Das Webinterface sollte erfolgreich gestartet haben! Jetzt kannst du über [localhost:3000](http://localhost:3000/) auf das Webinterface zugreifen!
+
+## Custom input.json
+
+Die json mit den Anweisungen muss folgendes Format besitzen:
+```
+{
+    "colors": [
+        [rot, grün, blau], // Erste Farbe
+        [rot, grün, blau], // Erste Farbe Besonders
+        [rot, grün, blau], // Zweite Farbe
+        [rot, grün, blau] // Zweite Farbe Besonders
+    ],
+    "files": [
+        {
+            name: "name",
+            "NM1": [],
+            "NM2": [],
+            "NIC": []
+        }
+    ]
+}
+```
+Die Datei muss mit der Endung .json sein!
+Diese dann im [.input](https://github.com/Maettis/Auvi/tree/master/.input) folder ablegen.
