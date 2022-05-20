@@ -22,8 +22,10 @@
                         <div id="progress"></div>
                     </div>
                 </div>
+                <button id="open">Open Video folder</button>
             </div>
         </div>
+        <div class="github"><a href="https://github.com/Maettis/Auvi" target="_blank">GitHub</a></div>
         <section>
             <div class="container viewport">
                 <div class="preview" style="position: absolute; top: 10px; left: 10px;">preview</div>
@@ -73,6 +75,11 @@
             socket.on('stop', function () {
                 started = false
                 start.innerText = 'Start'
+            })
+
+            const open = document.getElementById('open')
+            open.addEventListener('click', function() {
+                socket.emit('open')
             })
         </script>
     </body>

@@ -47,6 +47,9 @@ io.on('connection', (socket) => {
         stop = true
         io.emit('stop', true)
     })
+    socket.on('open', () => {
+        require('child_process').exec('start ' + __dirname + '\\videos')
+    })
 })
 
 // Import fetch
@@ -122,17 +125,18 @@ function check_c (nm, frame) {
     return show
 }
 
+if (!fs.existsSync('./.output')) {
+    fs.mkdirSync('./.output')
+    console.log(' Created missing output folder')
+}
+const odir = `./videos/`
+if (!fs.existsSync(odir))
+    fs.mkdirSync(odir)
+
 // Start frame process
 async function start() {
-    if (!fs.existsSync('./.output')) {
-        fs.mkdirSync('./.output')
-        console.log(' Created missing output folder')
-    }
     // Go through the json file and takes all videos
     let index = 0
-    const odir = `./videos/`
-    if (!fs.existsSync(odir))
-        fs.mkdirSync(odir)
     b1.start(goal_frame, 0)
     process(json.files[index])
     async function process (file) {

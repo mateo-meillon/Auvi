@@ -104,6 +104,21 @@ img {
     border-bottom: 1px solid rgba(0, 0, 0, 0.156);
 }
 
+.github {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    margin: 10px;
+}
+.github a {
+    color: black;
+    text-decoration: none;
+}
+.github a:hover {
+    color: #3b5898c7;
+    text-decoration: underline;
+}
+
 .content {
     padding: 10px;
 }
