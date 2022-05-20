@@ -1,7 +1,7 @@
 // Variables
-const goal_frame = 300 // 5sec * 50fps = 300 frames
-const step = 0.4 // The step of radius between frames
-const change = 40 // Die Schnelligkeit mit der die Kreise wechseln
+let goal_frame = 300 // 5sec * 50fps = 300 frames
+let step = 0.4 // The step of radius between frames
+let change = 40 // Die Schnelligkeit mit der die Kreise wechseln
 
 let stop = false
 
@@ -39,9 +39,14 @@ io.on('connection', (socket) => {
         start()
     })
     socket.on('vars', (data) => {
-        this.goal_frame = data.goal
-        this.step = data.step
-        this.change = data.change
+        console.log(data)
+        if (data.goal != '')
+            goal_frame = parseInt(data.goal)
+        if (data.step != '')
+            step = parseInt(data.step)
+        if (data.change != '')
+            change = parseInt(data.change)
+        console.log(goal_frame, step, change)
     })
     socket.on('stop', () => {
         stop = true

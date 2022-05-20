@@ -60,6 +60,7 @@
                     start.innerText = 'Stop'
                     socket.emit('start')
                 } else {
+                    started = false
                     socket.emit('stop')
                 }
             })
