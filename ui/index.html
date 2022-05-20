@@ -8,20 +8,27 @@
         <title>Auvi UI</title>
     </head>
     <body>
-        <section>
-            <div class="container viewport">
-                <img id="image">
-                <div class="overlay">
-                    <div>
-                        <div id="current"></div>
-                        <div class="progress">
-                            <div id="progress"></div>
-                        </div>
+        <div class="settings">
+            <div class="top">Auvi v1.0.1</div>
+            <div class="content">
+                <span>Settings</span>
+                <input id="goal" type="text" placeholder="Goal Frame (default: 300)">
+                <input id="step" type="text" placeholder="° per Frame (default: 0.4)">
+                <input id="change" type="text" placeholder="Centered circle change after (default: 40)">
+                <button id="start">Start</button>
+                <div>
+                    <div id="current"></div>
+                    <div class="progress">
+                        <div id="progress"></div>
                     </div>
                 </div>
             </div>
+        </div>
+        <section>
+            <div class="container viewport">
+                <div class="preview" style="position: absolute; top: 10px; left: 10px;">preview</div>
+                <img id="image">
             </div>
-            <button id="start">Start</button>
         </section>
         <script src="/socket.io/socket.io.js"></script>
         <script>
@@ -29,6 +36,8 @@
             var image = document.getElementById('image')
             var cur_cont = document.getElementById('current')
             var cur_pro = document.getElementById('progress')
+
+            let started = false
 
             function httpGet(theUrl) {
                 var xmlHttp = new XMLHttpRequest();
@@ -39,15 +48,31 @@
 
             const start = document.getElementById('start')
             start.addEventListener('click', function() {
-                start.innerHTML = httpGet('/api/start')
-                cont.style.display = 'none'
+                if (!started) {
+                    socket.emit('vars', {
+                        goal: document.getElementById('goal').value,
+                        step: document.getElementById('step').value,
+                        change: document.getElementById('change').value
+                    })
+                    started = true
+                    start.innerText = 'Stop'
+                    socket.emit('start')
+                } else {
+                    socket.emit('stop')
+                }
             })
 
             socket.on('progress', function (msg) {
+                started = true
                 image.src = 'data:image/jpeg;base64,' + msg.image
                 cur_cont.innerHTML = msg.current
                 cur_pro.style.width = msg.progress + '%'
-                start.style.display = 'none'
+                start.innerText = 'Stop'
+            })
+
+            socket.on('stop', function () {
+                started = false
+                start.innerText = 'Start'
             })
         </script>
     </body>

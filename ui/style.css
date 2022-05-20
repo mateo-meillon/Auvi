@@ -6,7 +6,7 @@ body, html {
     font-family: 'Open Sans', sans-serif;
     font-size: 14px;
     color: #333;
-    /* background: #aadada; */
+    background: #aadada;
 }
 
 section {
@@ -19,7 +19,6 @@ section {
 .container {
     max-width: 95vw;
     background: #fff;
-    overflow: hidden;
     display: inline-flex;
     align-items: center;
     justify-content: center;
@@ -33,6 +32,13 @@ button {
     font-weight: bold;
     cursor: pointer;
     padding: 10px;
+    width: 100%;
+    transition: all 0.3s;
+}
+
+button:hover {
+    background: #3b5898c7;
+    color: #fff;
 }
 
 img {
@@ -42,20 +48,18 @@ img {
 
 .overlay {
     position: absolute;
-    top: 0;
-    left: 0;
+    top: 20px;
+    left: 20px;
     width: 150px;
     /* background-color: rgba(0, 0, 0, 0.553); */
     color: white;
 }
 #current {
-    font-size: 30px;
+    font-size: 20px;
     padding: 10px 0;
+    margin-top: 10px;
     width: 100%;
     border-radius: 3px;
-    text-align: center;
-    background: #3b5898c7;
-    box-shadow: 0 0 10px -3px black;
 }
 
 .progress {
@@ -64,8 +68,7 @@ img {
     border-radius: 10px;
     position: relative;
     overflow: hidden;
-    margin-top: 10px;
-    box-shadow: 0 0 10px -3px rgb(0, 0, 0);
+    background-color: #ddd;
 }
 #progress {
     height: 100%;
@@ -74,4 +77,47 @@ img {
     position: absolute;
     left: 0;
     top: 0;
+}
+
+.settings {
+    position: fixed;
+    top: 0;
+    left: 0;
+    margin: 30px;
+    width: 300px;
+    background-color: white;
+    overflow: hidden;
+    box-shadow: 0 0 10px -3px black;
+    z-index: 100;
+    border-radius: 3px;
+}
+
+.top {
+    height: 25px;
+    padding: 10px 0;
+    display: inline-flex;
+    align-items: center;
+    padding-left: 20px;
+    /* background-color: rgb(219, 219, 219); */
+    font-weight: bold;
+    width: calc(100% - 20px);
+    border-bottom: 1px solid rgba(0, 0, 0, 0.156);
+}
+
+.content {
+    padding: 10px;
+}
+
+input {
+    width: calc(100% - 20px - 2px);
+    border: 1px solid rgba(0, 0, 0, 0.156);
+    outline: none;
+    padding: 10px;
+    border-radius: 3px;
+    margin: 10px 0 0 0;
+    background-color: #f5f5f5;
+    transition: all 0.3s;
+}
+input:focus {
+    border: 1px solid #3b5898c7;
 }

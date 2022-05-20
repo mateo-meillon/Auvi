@@ -3,7 +3,7 @@ const goal_frame = 300 // 5sec * 50fps = 300 frames
 const step = 0.4 // The step of radius between frames
 const change = 40 // Die Schnelligkeit mit der die Kreise wechseln
 
-
+let stop = false
 
 const app = require('express')()
 app.use(function (req, res, next) {
@@ -31,18 +31,22 @@ app.get('/', (req, res) => { res.sendFile(__dirname + '/ui/index.html') })
 app.get('/:file', (req, res) => { res.sendFile(__dirname + '/ui/' + req.params.file) })
 app.get('/api/coords', (req, res) => { res.send(coords) })
 app.get('/static/:file', (req, res) => { res.sendFile(__dirname + `/static/${req.params.file}`) })
-app.get('/api/start', (req, res) => {
-    if (started) {
-        res.send('Rendering...')
-        return
-    }
-    started = true
-    start()
-    res.send('Rendering...')
-})
 
 io.on('connection', (socket) => {
-    console.log('New connection')
+    socket.on ('start', () => {
+        if (started) { return }
+        started = true
+        start()
+    })
+    socket.on('vars', (data) => {
+        this.goal_frame = data.goal
+        this.step = data.step
+        this.change = data.change
+    })
+    socket.on('stop', () => {
+        stop = true
+        io.emit('stop', true)
+    })
 })
 
 // Import fetch
@@ -50,7 +54,7 @@ const fetch = (...args) => import('node-fetch').then(({default: fetch}) => fetch
 const path = require('path')
 
 const cliProgress = require('cli-progress')
-const b1 = new cliProgress.SingleBar({ 
+const b1 = new cliProgress.SingleBar({
     // Format the bar that i can see the current task
     format: '{index}/{totali} |{bar}| {value} of {total} Frames ({percentage}%) | {name}',
     barCompleteChar: '\u2588',
@@ -67,6 +71,7 @@ const ffmpeg = require('fluent-ffmpeg')
 
 // Launches virtual browser
 const puppeteer = require('puppeteer')
+const { SocketAddress } = require('net')
 let browser
 puppeteer.launch().then(res => {
     browser = res
@@ -149,6 +154,7 @@ async function start() {
                 name: name,
                 total: 300
             })
+            if (stop) return
             const base64 = fs.readFileSync(`./.output/${name}/frame_${frame}.jpeg`, 'base64')
             let progress = (i / goal_frame) * 100
             io.emit('progress', { progress: progress, image: base64, current: (index + 1) + '/' + json.files.length })
@@ -173,7 +179,7 @@ async function start() {
                 '-s', 'hd1080'
             ])
             .on('start', function (commandLine) {
-                console.log('\nSpawned Ffmpeg with command: ' + commandLine)
+                // console.log('\nSpawned Ffmpeg with command: ' + commandLine)
             }).on('error', function (err) {
                 console.log('\nAn error occurred: ' + err.message)
             }).on('end', function () {
